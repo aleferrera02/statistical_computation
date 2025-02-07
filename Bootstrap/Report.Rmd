@@ -1,0 +1,42 @@
+---
+title: "Bootstrap for Confidence Intervals"
+author: "Alessandro Ferrera"
+output: pdf_document
+geometry: margin=1in
+---
+
+Bootstrap is a powerful technique for estimating the sampling distribution of a statistic. In this report, we will explore the use of the bootstrap method to estimate confidence intervals for the mean of an exponential distribution. We will compare the performance of various bootstrap methods with the asymptotic method for different sample sizes.
+
+## Implementation
+
+We are considering $X_1, X_2, \ldots, X_N \overset{\text{iid.}}{\sim} \mathcal{E}(2)$ with $\mathbb{E} [X_1] = \frac{1}{2}$. We will generate $N = 10, 50, 100$ samples from this distribution and estimate the Confidence Interval for the mean with:
+
+-   Asymptotic Method
+
+-   Basic Bootstrap Method
+
+-   Studentized Bootstrap Method
+
+-   Percentile Bootstrap Method
+
+With $B = 10^4$ bootstrap samples. We will then compare the coverage proportion and interval length of the confidence intervals obtained. The analysis will be conducted in R using the `boot` package. 
+
+## Results
+
+The following plots show the coverage proportion and the interval lenght of the confidence intervals. 
+$\\$$\\$
+
+```{r CI,echo = FALSE,-+ warning=FALSE, message=FALSE, fig.width=8, fig.height=3.3, fig.align='center'}
+source("test.R")
+```
+$\\$
+
+We can observe that the asymptotic method consistently performs very well, even with small sample sizes. This can be attributed to the well-behaved nature of the exponential distribution and the fact that it has the advantage of incorporating more information about the distribution, as it uses the true standard deviation to construct the confidence interval. $\\$
+The bootstrap methods also perform well, but they require a large $B$ to achieve the same level of accuracy as the asymptotic method. Significant differences are noticeable only with $N=10$, as the four methods tend to exhibit very similar performance with larger sample sizes. $\\$
+The studentized method generally performs better in terms of coverage proportion, but it results in larger interval lengths compared to the other methods when the sample size is small. $\\$
+The percentile and basic methods show slightly worse performance in terms of coverage proportion, but they compensate with smaller interval lengths.
+
+## Conclusion
+
+In conclusion, in this simulation study, we have shown that the asymptotic method is a reliable choice for constructing confidence intervals for the mean of an exponential distribution. However, the bootstrap methods can be useful when the sample size is small, when the distribution is not well-behaved or when we don't have access to the true standard deviation of the distribution. The choice of the bootstrap method depends on the specific characteristics of the data and the desired trade-off between coverage proportion and interval length. 
+
